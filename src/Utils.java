@@ -68,16 +68,19 @@ public final class Utils {
 
         do {
             valideInput = false;
-            input = keyboard.nextLine();
+            input = keyboard.next();
 
             for (int i = 0; i < inputList.length; i++) {
-                if (inputList[i] == input.toLowerCase()) {
+                if (inputList[i].equals(input.toLowerCase())) {
+                    input = input.toLowerCase();
                     valideInput = true;
                     break;
                 }
             }
 
-        } while (valideInput);
+            if (!valideInput) System.out.print("Wrong input! try again:  ");
+
+        } while (!valideInput);
         
         
         return input;
