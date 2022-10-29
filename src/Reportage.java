@@ -31,8 +31,9 @@ public class Reportage extends Emission {
     private void setTheme() {
         String themes[] = {"Informative", "Animals", "Cultural"};
 
-        System.out.println("Choose reportage's theme:  ");
+        System.out.println("\nChoose reportage's theme:  ");
         for (int i = 0; i < themes.length; i++) System.out.println("  " + i + " for " + themes[i]);
+        System.out.print(">> ");
         int input = Utils.minMaxInt(0, themes.length);
         this.theme = themes[input];
     }

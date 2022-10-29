@@ -26,8 +26,7 @@ public final class Utils {
 
         do {
             try {
-                System.out.print("Enter the date: ");
-                System.out.print("Year - ");
+                System.out.print("\nYear - ");
                 year = keyboard.nextInt();
                 System.out.print("Month - ");
                 month = keyboard.nextInt();
@@ -37,7 +36,8 @@ public final class Utils {
                 date = LocalDate.of(year, month, day);
                 dateIsCorrect = true;
             } catch (Exception e) {
-                System.out.println("Wrong date! try again: ");
+                System.out.println("Wrong date! try again");
+                System.out.print(">> ");
                 dateIsCorrect = false;
             }
 
@@ -54,7 +54,8 @@ public final class Utils {
             input = keyboard.nextInt();
 
             if (input < minInput || input >= maxInput) {
-                System.out.print("Input should be >= " + minInput + " and < " + maxInput + " try again!  ");
+                System.out.print("Input should be >= " + minInput + " and < " + maxInput + " try again!");
+                System.out.print("\n>> ");
             }
 
         } while (input < minInput || input >= maxInput);
@@ -78,7 +79,10 @@ public final class Utils {
                 }
             }
 
-            if (!valideInput) System.out.print("Wrong input! try again:  ");
+            if (!valideInput) {
+                System.out.print("Wrong input! try again");
+                System.out.print("\n>> ");
+            }
 
         } while (!valideInput);
         
