@@ -1,10 +1,9 @@
 public class Reportage extends Emission {
     private String theme;
 
-
     public Reportage(String name, int duration) {
         super(name, duration);
-        
+        this.setTheme();
     }
 
     @Override
@@ -13,13 +12,6 @@ public class Reportage extends Emission {
         int duration = super.getDuration();
         int endingHour = startingHour + duration;
         super.setEndingHour(endingHour);
-    }
-
-    public void setTheme() {
-        String themes[] = {"Informative", "Animals", "Cultural"};
-
-        System.out.println("Choose reportage's theme:  ");
-        for (int i = 0; i < themes.length; i++) System.out.println("  " + i + " for " + themes[i]);
     }
     
     // Getters --------------------------------------
@@ -33,5 +25,15 @@ public class Reportage extends Emission {
 
     public String getTheme() {
         return this.theme;
+    }
+
+    // Setters ---------------------------------------
+    private void setTheme() {
+        String themes[] = {"Informative", "Animals", "Cultural"};
+
+        System.out.println("Choose reportage's theme:  ");
+        for (int i = 0; i < themes.length; i++) System.out.println("  " + i + " for " + themes[i]);
+        int input = Utils.minMaxInt(0, themes.length);
+        this.theme = themes[input];
     }
 }
