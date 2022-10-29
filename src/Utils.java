@@ -62,6 +62,27 @@ public final class Utils {
         return input;
     }
 
+    public static String inputAndValidateString(String inputList[]) {
+        String input;
+        boolean valideInput;
+
+        do {
+            valideInput = false;
+            input = keyboard.nextLine();
+
+            for (int i = 0; i < inputList.length; i++) {
+                if (inputList[i] == input.toLowerCase()) {
+                    valideInput = true;
+                    break;
+                }
+            }
+
+        } while (valideInput);
+        
+        
+        return input;
+    }
+
     public static String getEntertainmentClassTag() {
         return "entertainment";
     }

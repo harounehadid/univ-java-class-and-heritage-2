@@ -3,6 +3,7 @@ public class App {
         System.out.println("Hello, world");
 
         ScheduleManagement todaySchedule = new ScheduleManagement();
-        todaySchedule.launch();
+        
+        boolean addAnotherEmission;
     }
 }

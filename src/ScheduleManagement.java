@@ -26,14 +26,15 @@ public class ScheduleManagement {
 
     public ScheduleManagement() {
         this.schedule = new ArrayList<ScheduleCell>();
+        this.initialSchedule();
     }
 
-    public void launch() {
-        this.initialScheduleSet();
-        this.displaySchedule();
-    }
+    // public void launch() {
+    //     this.initialSchedule();
+    //     this.displaySchedule();
+    // }
 
-    private void initialScheduleSet() {
+    private void initialSchedule() {
         // Initialize the schedule hour by hour
         for (int i = 0; i < 24; i++) {
             ScheduleCell sc = new ScheduleCell(i, i + 1);
@@ -57,9 +58,9 @@ public class ScheduleManagement {
     }
 
     public void displaySchedule() {
-        for (int i = 0; i < 24; i++) {
-            System.out.print("\nSchedule cell:  ");
-            System.out.print(this.schedule.get(i).acceptedEmissionTypes);
-        }
+        // for (int i = 0; i < 24; i++) {
+        //     System.out.print("\nSchedule cell:  ");
+        //     System.out.print(this.schedule.get(i).acceptedEmissionTypes);
+        // }
     }
 }
