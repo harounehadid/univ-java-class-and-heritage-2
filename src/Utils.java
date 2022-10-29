@@ -4,7 +4,6 @@ import java.util.Scanner;
 public final class Utils {
     static Scanner keyboard = new Scanner(System.in);
 
-    // Input validation functions
     public static int totallyPositiveInt() {
         int input;
 
@@ -61,5 +60,17 @@ public final class Utils {
         } while (input < minInput || input >= maxInput);
 
         return input;
+    }
+
+    public static String getEntertainmentClassTag() {
+        return "entertainment";
+    }
+
+    public static String getFictionClassTag() {
+        return "fiction";
+    }
+
+    public static String getReportageTag() {
+        return "reportage";
     }
 }
