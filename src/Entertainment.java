@@ -2,7 +2,7 @@ public class Entertainment extends Emission {
     private String animatorName;
     
     public Entertainment(String name, String animatorName) {
-        super(name, 2);
+        super(Utils.getEntertainmentClassTag(), name, 2);
         this.animatorName = animatorName;
     }
 

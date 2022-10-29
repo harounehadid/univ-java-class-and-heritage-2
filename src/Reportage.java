@@ -2,7 +2,7 @@ public class Reportage extends Emission {
     private String theme;
 
     public Reportage(String name, int duration) {
-        super(name, duration);
+        super(Utils.getReportageTag(), name, duration);
         this.setTheme();
     }
 

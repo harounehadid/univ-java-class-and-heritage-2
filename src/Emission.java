@@ -1,10 +1,12 @@
 public abstract class Emission {
+    private String type;
     private String name;
     private int duration;
     private int startingHour;
     private int endingHour;
 
-    public Emission(String name, int duration) {
+    public Emission(String type, String name, int duration) {
+        this.type = type;
         this.name = name;
         this.duration = duration;
     }
@@ -13,6 +15,10 @@ public abstract class Emission {
     public abstract void calculateEndingHour(int startingHour);
 
     // Getters ----------------------------------
+    public String getType() {
+        return this.type;
+    }
+
     public String getName() {
         return this.name;
     }

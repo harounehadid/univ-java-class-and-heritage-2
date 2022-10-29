@@ -6,7 +6,7 @@ public class Fiction extends Emission {
     private boolean toBeRediffused;
 
     public Fiction(String name, int duration, LocalDate creationDate, String directorName, boolean toBeRediffused) {
-        super(name, duration);
+        super(Utils.getFictionClassTag(), name, duration);
         this.creationDate = creationDate;
         this.directorName = directorName;
         this.toBeRediffused = toBeRediffused;
