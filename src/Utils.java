@@ -73,4 +73,8 @@ public final class Utils {
     public static String getReportageTag() {
         return "reportage";
     }
+
+    public static String getOtherTag() {
+        return "other";
+    }
 }
