@@ -7,8 +7,11 @@ public class App {
         final String ANSI_RESET = "\u001B[0m";
         final String ANSI_GREEN = "\u001B[32m";
 
+        // Clear the console before displaying the program
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
 
-        System.out.println("---------Set your emission schedule-----------");
+        System.out.print("---------Set your emission schedule-----------");
 
         ScheduleManagement todaySchedule = new ScheduleManagement();
         
