@@ -94,6 +94,44 @@ public final class Utils {
         return input;
     }
 
+    public static String generateId() {
+        String input = "";
+
+        for (int i = 0; i < 8; i++) {
+            int randNumber = (int)(Math.random() * 16);
+
+            if (randNumber < 10) {
+                input += Integer.toString(randNumber);
+            }
+            else {
+                switch (randNumber) {
+                    case 10:
+                        input += "A";
+                        break;
+                    case 11:
+                        input += "B";
+                        break;
+                    case 12:
+                        input += "C";
+                        break;
+                    case 13:
+                        input += "D";
+                        break;
+                    case 14:
+                        input += "E";
+                        break;
+                    case 15:
+                        input += "F";
+                        break;
+                    default:
+                        break;
+                } 
+            }
+        }
+
+        return input;
+    }
+
     public static String getEntertainmentClassTag() {
         return "entertainment";
     }

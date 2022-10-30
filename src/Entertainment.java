@@ -2,12 +2,12 @@ public class Entertainment extends Emission {
     private String animatorName;
     
     public Entertainment(String name, String animatorName) {
-        super(Utils.getEntertainmentClassTag(), name, 2);
+        super(Utils.generateId(), Utils.getEntertainmentClassTag(), name, 2);
         this.animatorName = animatorName;
     }
 
     public Entertainment(Entertainment entertainment) {
-        super(Utils.getEntertainmentClassTag(), entertainment.getName(), 2);
+        super(Utils.generateId(), Utils.getEntertainmentClassTag(), entertainment.getName(), 2);
         this.animatorName = entertainment.getAnimatorName();
     }
 

@@ -2,12 +2,12 @@ public class Reportage extends Emission {
     private String theme;
 
     public Reportage(String name, int duration) {
-        super(Utils.getReportageTag(), name, duration);
+        super(Utils.generateId(), Utils.getReportageTag(), name, duration);
         this.setTheme();
     }
 
     public Reportage(Reportage reportage) {
-        super(Utils.getReportageTag(), reportage.getName(), reportage.getDuration());
+        super(Utils.generateId(), Utils.getReportageTag(), reportage.getName(), reportage.getDuration());
         this.theme = reportage.getTheme();
     }
 

@@ -6,14 +6,14 @@ public class Fiction extends Emission {
     private boolean toBeRediffused;
 
     public Fiction(String name, int duration, LocalDate creationDate, String directorName, boolean toBeRediffused) {
-        super(Utils.getFictionClassTag(), name, duration);
+        super(Utils.generateId(), Utils.getFictionClassTag(), name, duration);
         this.creationDate = creationDate;
         this.directorName = directorName;
         this.toBeRediffused = toBeRediffused;
     }
 
     public Fiction(Fiction fiction) {
-        super(Utils.getFictionClassTag(), fiction.getName(), fiction.getDuration());
+        super(Utils.generateId(), Utils.getFictionClassTag(), fiction.getName(), fiction.getDuration());
         this.creationDate = fiction.getCreationDate();
         this.directorName = fiction.getDirectorName();
         this.toBeRediffused = fiction.getToBeRediffused();
