@@ -4,6 +4,10 @@ import java.util.Scanner;
 public final class Utils {
     static Scanner keyboard = new Scanner(System.in);
 
+    // Colors for console print
+    final String ANSI_RESET = "\u001B[0m";
+    final String ANSI_RED = "\u001B[31m";
+
     public static int totallyPositiveInt() {
         int input;
 
