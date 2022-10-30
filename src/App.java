@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
@@ -42,7 +43,6 @@ public class App {
                     System.out.print("\nEnter animator name:  ");
                     String animatorName = keyboard.next();
                     emission = new Entertainment(name, animatorName);
-                    // Add emission to schedule
                 }
                 else {
                     System.out.print("\nEnter the duration:  ");
@@ -63,17 +63,19 @@ public class App {
                         String rediffuse = Utils.inputAndValidateString(yesAndNoAnwser);
 
                         emission = new Fiction(name, duration, date, directorName, rediffuse.equals("y"));
-                        
-                        // Add emission to schedule
                     }
                     else if (typeChosen == 2) {
                         // Max value is excluded
                         duration = Utils.minMaxInt(1, 7);
                         emission = new Reportage(name, duration);
-
-                        // Add emission to schedule
+                    }
+                    else {
+                        emission = null;
                     }
                 }
+
+                if (emission != null) todaySchedule.addEmission(emission);
+                todaySchedule.displaySchedule();
             }
             
         } while (addEmission);
