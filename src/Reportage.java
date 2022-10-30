@@ -6,6 +6,11 @@ public class Reportage extends Emission {
         this.setTheme();
     }
 
+    public Reportage(Reportage reportage) {
+        super(Utils.getReportageTag(), reportage.getName(), reportage.getDuration());
+        this.theme = reportage.getTheme();
+    }
+
     @Override
     public void calculateEndingHour(int startingHour) {
         super.setStartingHour(startingHour);

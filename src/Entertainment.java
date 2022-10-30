@@ -6,6 +6,11 @@ public class Entertainment extends Emission {
         this.animatorName = animatorName;
     }
 
+    public Entertainment(Entertainment entertainment) {
+        super(Utils.getEntertainmentClassTag(), entertainment.getName(), 2);
+        this.animatorName = entertainment.getAnimatorName();
+    }
+
     @Override
     public void calculateEndingHour(int startingHour) {
         super.setStartingHour(startingHour);

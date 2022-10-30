@@ -12,6 +12,13 @@ public class Fiction extends Emission {
         this.toBeRediffused = toBeRediffused;
     }
 
+    public Fiction(Fiction fiction) {
+        super(Utils.getFictionClassTag(), fiction.getName(), fiction.getDuration());
+        this.creationDate = fiction.getCreationDate();
+        this.directorName = fiction.getDirectorName();
+        this.toBeRediffused = fiction.getToBeRediffused();
+    }
+
     @Override
     public void calculateEndingHour(int startingHour) {
         super.setStartingHour(startingHour);
