@@ -41,7 +41,7 @@ public abstract class Emission {
         return this.endingHour;
     }
 
-    // Setters ----------------------------------
+    // Setters
     public void setStartingHour(int startingHour) {
         this.startingHour = startingHour;
     }

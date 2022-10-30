@@ -77,7 +77,12 @@ public class App {
                     }
                 }
 
-                if (emission != null) todaySchedule.addEmission(emission);
+                if (emission != null) {
+                    System.out.print("\nEnter the starting hour:  ");
+                    int startingHour = keyboard.nextInt();
+                    emission.calculateEndingHour(startingHour);
+                    todaySchedule.addEmission(emission);
+                }
             }
 
             todaySchedule.displaySchedule();

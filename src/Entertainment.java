@@ -13,29 +13,37 @@ public class Entertainment extends Emission {
 
     @Override
     public void calculateEndingHour(int startingHour) {
-        super.setStartingHour(startingHour);
+        int minHour = 18;
+        int maxHour = 23;
         int duration = super.getDuration();
+        boolean outOfRange = false;
+
+        do {
+            if (startingHour < minHour || startingHour >= maxHour) {
+                System.out.print("\nWrong input! try again");
+                System.out.print("\n>> ");
+                startingHour = Utils.minMaxInt(minHour, maxHour);
+            }
+
+            if (startingHour + duration > maxHour) {
+                System.out.print("\nThe emission can be placed in the schedule! try again");
+                System.out.print("\n>> ");
+                startingHour = -1;
+                outOfRange = true;
+            }
+            else {
+                outOfRange = false;
+            }
+
+        } while (outOfRange);
+
+
+        super.setStartingHour(startingHour);
         int endingHour = startingHour + duration;
         super.setEndingHour(endingHour);
     }
 
     // Getters
-    public String getName() {
-        return super.getName();
-    }
-
-    public int getDuration() {
-        return super.getDuration();
-    }
-
-    public int getStartingHour() {
-        return super.getStartingHour();
-    }
-
-    public int getEndingHour() {
-        return super.getEndingHour();
-    }
-
     public String getAnimatorName() {
         return this.animatorName;
     }

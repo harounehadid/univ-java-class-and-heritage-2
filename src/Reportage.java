@@ -13,21 +13,67 @@ public class Reportage extends Emission {
 
     @Override
     public void calculateEndingHour(int startingHour) {
-        super.setStartingHour(startingHour);
+        int minHour1 = 0;
+        int maxHour1 = 6;
+        int minHour2 = 14;
+        int maxHour2 = 18;
         int duration = super.getDuration();
+        boolean outOfRange = false;
+        boolean firstCondition;
+        boolean secondCondition;
+        boolean firstRange = true;
+
+        do {
+            firstCondition = startingHour >= minHour1 && startingHour < maxHour1;
+            secondCondition = startingHour >= minHour2 && startingHour < maxHour2;
+
+            if (!(firstCondition && secondCondition)) {
+                if (startingHour < 14) {
+                    firstRange = true;
+                    System.out.print("\nWrong input! try again");
+                    System.out.print("\n>> ");
+                    startingHour = Utils.minMaxInt(minHour1, maxHour1);
+                }
+                else {
+                    firstRange = false;
+                    System.out.print("\nWrong input! try again");
+                    System.out.print("\n>> ");
+                    startingHour = Utils.minMaxInt(minHour2, maxHour2);
+                }
+            }
+
+            if (firstRange) {
+                if (startingHour + duration > 14) {
+                    System.out.print("\nThe emission can be placed in the schedule! try again");
+                    System.out.print("\n>> ");
+                    startingHour = -1;
+                    outOfRange = true;
+                }
+                else {
+                    outOfRange = false;
+                }
+            }
+            else {
+                if (startingHour + duration > 18) {
+                    System.out.print("\nThe emission can be placed in the schedule! try again");
+                    System.out.print("\n>> ");
+                    startingHour = -1;
+                    outOfRange = true;
+                }
+                else {
+                    outOfRange = false;
+                }
+            }
+
+        } while (outOfRange);
+
+
+        super.setStartingHour(startingHour);
         int endingHour = startingHour + duration;
         super.setEndingHour(endingHour);
     }
     
     // Getters --------------------------------------
-    public String getName() {
-        return super.getName();
-    }
-
-    public int getDuration() {
-        return super.getDuration();
-    }
-
     public String getTheme() {
         return this.theme;
     }

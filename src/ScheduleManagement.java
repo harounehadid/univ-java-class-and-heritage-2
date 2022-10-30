@@ -80,9 +80,7 @@ public class ScheduleManagement {
 
             for (int j = 0; j < curCell.acceptedEmissionTypes.size(); j++) {
                 if (curCell.acceptedEmissionTypes.get(j).equals(emissionType) && !curCell.occupied) {
-                    if (freeSlotStart == -1) freeSlotStart = i;
-
-                    curCell.occupied = true;
+                    if (newEmission.getStartingHour() == i) freeSlotStart = i;
                     freeSlotEnd = i;
 
                     if (freeSlotEnd - freeSlotStart + 1 == newEmission.getDuration()) {
@@ -92,22 +90,88 @@ public class ScheduleManagement {
                 }
             }
 
-            if (freeSlotFound) break;
+            if (freeSlotFound) {
+                for (int k = freeSlotStart; k <= freeSlotEnd; k++)  this.schedule.get(k).occupied = true;
+                break;
+            }
         }
-
-        System.out.println("\nstart:  " + freeSlotStart + "  end:  " + freeSlotEnd);
 
         if (freeSlotFound) {
             newEmission.setStartingHour(freeSlotStart);
             newEmission.setEndingHour(freeSlotEnd + 1);
 
             for (int i = newEmission.getStartingHour(); i < newEmission.getEndingHour(); i++) {
-                System.out.println("\nstart:  " + freeSlotStart + "  end:  " + freeSlotEnd);
                 schedule.get(i).setEmission(newEmission);
             }
         }
         else {
-            System.out.println(ANSI_RED + "\nThere is a time conflict!" + ANSI_RESET);
+            System.out.println(ANSI_RED + "\nThere is a time conflict!" + ANSI_RESET + "\n\n");
+
+            System.out.println("Do you want to take out any emission?  ");
+            System.out.print("Y (yes) | N (no):  ");
+
+            String yesAndNoAnwser[] = {"y", "n"};
+            String takeOut = Utils.inputAndValidateString(yesAndNoAnwser);
+
+            System.out.println("\n\n");
+
+            if (takeOut.equals("y")) {
+                changeSchedule(newEmission, newEmission.getType());
+            }
+            else {
+                nextDayEmissions.add(newEmission);
+            }
+        }
+    }
+
+    private void changeSchedule(Emission emission, String emissionType) {
+        String targetedId = "";
+        String idToAvoid = "";
+
+        for (int i = 0; i < schedule.size(); i++) {
+            ScheduleCell curCell = this.schedule.get(i);
+
+            for (int j = 0; j < curCell.acceptedEmissionTypes.size(); j++) {
+                if (curCell.acceptedEmissionTypes.get(j).equals(emissionType) && curCell.occupied) {
+                    if (curCell.emission != null) {
+                        if (curCell.emission.getId() != targetedId && !idToAvoid.equals(curCell.emission.getId())) {
+                            System.out.println("Do you want to take out this emission? > Name:  " + curCell.emission.getName() + 
+                            " > Id:  " + curCell.emission.getId());
+                            System.out.print("Y (yes) | N (no):  ");
+    
+                            String yesAndNoAnwser[] = {"y", "n"};
+                            String takeOut = Utils.inputAndValidateString(yesAndNoAnwser);
+    
+                            if (takeOut.equals("y")) {
+                                targetedId = curCell.emission.getId();
+                            }
+                            else {
+                                idToAvoid = curCell.emission.getId();
+                            }
+
+                            System.out.println("\nTargetedId:  " + targetedId + "\nIdToAvoid:  " + idToAvoid);
+                        }
+    
+                        if (curCell.emission.getId() == targetedId) {
+                            nextDayEmissions.add(curCell.emission);
+                            curCell.emission = null;
+                            curCell.occupied = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        this.addEmission(emission);
+    }
+
+    public void addToNextDayList(Emission emission) {
+        boolean exist = false;
+
+        for (int i = 0; i < nextDayEmissions.size(); i++) {
+            if (!nextDayEmissions.get(i).getId().equals(emission.getId())) {
+                nextDayEmissions.add(emission);
+            }
         }
     }
 
