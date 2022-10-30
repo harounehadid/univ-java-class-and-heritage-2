@@ -24,24 +24,6 @@ public class ScheduleManagement {
 
         // Setters --------------------------------
         public void setEmission(Emission emission) {
-            // String emissionType = emission.getType();
-
-            // if (emissionType.equals(Utils.getEntertainmentClassTag())) {
-            //     Entertainment em = (Entertainment)emission;
-            //     this.emission = new Entertainment(em);
-            // }
-            // else if (emissionType.equals(Utils.getFictionClassTag())) {
-            //     Fiction em = (Fiction)emission;
-            //     this.emission = new Fiction(em);
-            // }
-            // else if (emissionType.equals(Utils.getReportageTag())) {
-            //     Reportage em = (Reportage)emission;
-            //     this.emission = new Reportage(em);
-            // }
-            // else {
-            //     this.emission = null;
-            // }
-
             this.emission = emission;
         }
     }
@@ -90,6 +72,7 @@ public class ScheduleManagement {
     public void addEmission(Emission newEmission) {
         int freeSlotStart = -1;
         int freeSlotEnd = -1;
+        boolean freeSlotFound = false;
 
         for (int i = 0; i < schedule.size(); i++) {
             ScheduleCell curCell = this.schedule.get(i);
@@ -98,18 +81,30 @@ public class ScheduleManagement {
             for (int j = 0; j < curCell.acceptedEmissionTypes.size(); j++) {
                 if (curCell.acceptedEmissionTypes.get(j).equals(emissionType) && !curCell.occupied) {
                     if (freeSlotStart == -1) freeSlotStart = i;
+
+                    curCell.occupied = true;
                     freeSlotEnd = i;
+
+                    if (freeSlotEnd - freeSlotStart + 1 == newEmission.getDuration()) {
+                        freeSlotFound = true;
+                        break;
+                    }
                 }
             }
+
+            if (freeSlotFound) break;
         }
 
-        System.out.println(freeSlotEnd + "  -  " + freeSlotStart);
+        System.out.println("\nstart:  " + freeSlotStart + "  end:  " + freeSlotEnd);
 
-        if (freeSlotEnd - freeSlotStart + 1 >= newEmission.getDuration()) {
+        if (freeSlotFound) {
             newEmission.setStartingHour(freeSlotStart);
-            newEmission.setEndingHour(freeSlotEnd);
+            newEmission.setEndingHour(freeSlotEnd + 1);
 
-            for (int i = 21; i < 24; i++) schedule.get(i).setEmission(newEmission);
+            for (int i = newEmission.getStartingHour(); i < newEmission.getEndingHour(); i++) {
+                System.out.println("\nstart:  " + freeSlotStart + "  end:  " + freeSlotEnd);
+                schedule.get(i).setEmission(newEmission);
+            }
         }
         else {
             System.out.println(ANSI_RED + "\nThere is a time conflict!" + ANSI_RESET);
@@ -117,69 +112,34 @@ public class ScheduleManagement {
     }
 
     public void displaySchedule() {
-        int i = 0;
-        int j = 0;
-        int len = 8;
+        int len = schedule.size();
+        int jumpingIndex = 0;
+        ScheduleCell curCell;
+        String output;
 
-        for (i = i; i < len; i++) {
-            String output = Integer.toString(i) + ":00-" + Integer.toString(i + 1) + ":00";
-            System.out.printf("%-15s", output);
+        for (int i = 0; i < len; i++) {
+            jumpingIndex += len / 3;
+
+            for (int j = i; j < jumpingIndex; j++) {
+                curCell = schedule.get(j);
+                output = Integer.toString(curCell.startingHour) + ":00-" + Integer.toString(curCell.endingHour) + ":00";
+                System.out.printf("%-15s", output);
+            }
+
+            System.out.printf("\n");
+
+            for (int j = i; j < jumpingIndex; j++) {
+                curCell = this.schedule.get(j);
+    
+                if (curCell.emission != null) output = curCell.emission.getName();
+                else output = "none";
+    
+                System.out.printf("%-15s", output);
+            }
+
+            System.out.printf("\n\n");
+
+            i = jumpingIndex - 1;
         }
-
-        System.out.printf("\n");
-
-        for (j = j; j < len; j++) {
-            String output;
-            ScheduleCell curCell = this.schedule.get(j);
-
-            if (curCell.emission != null) output = curCell.emission.getName();
-            else output = "none";
-
-            System.out.printf("%-15s", output);
-        }
-
-        System.out.printf("\n\n");
-
-        len = 16;
-
-        for (i = i; i < len; i++) {
-            String output = Integer.toString(i) + ":00-" + Integer.toString(i + 1) + ":00";
-            System.out.printf("%-15s", output);
-        }
-
-        System.out.printf("\n");
-
-        for (j = j; j < len; j++) {
-            String output;
-            ScheduleCell curCell = this.schedule.get(j);
-
-            if (curCell.emission != null) output = curCell.emission.getName();
-            else output = "none";
-
-            System.out.printf("%-15s", output);
-        }
-
-        System.out.printf("\n\n");
-
-        len = 24;
-
-        for (i = i; i < len; i++) {
-            String output = Integer.toString(i) + ":00-" + Integer.toString(i + 1) + ":00";
-            System.out.printf("%-15s", output);
-        }
-
-        System.out.printf("\n");
-
-        for (j = j; j < len; j++) {
-            String output;
-            ScheduleCell curCell = this.schedule.get(j);
-
-            if (curCell.emission != null) output = curCell.emission.getName();
-            else output = "none";
-
-            System.out.printf("%-15s", output);
-        }
-
-        System.out.printf("\n\n");
     }
 }
