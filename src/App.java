@@ -75,8 +75,9 @@ public class App {
                 }
 
                 if (emission != null) todaySchedule.addEmission(emission);
-                todaySchedule.displaySchedule();
             }
+
+            todaySchedule.displaySchedule();
             
         } while (addEmission);
     }

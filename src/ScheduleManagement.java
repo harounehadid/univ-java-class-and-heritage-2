@@ -117,36 +117,69 @@ public class ScheduleManagement {
     }
 
     public void displaySchedule() {
-        for (int i = 0; i < 12; i++) System.out.print(i + ":00 - " + i + 1 + ":00");
+        int i = 0;
+        int j = 0;
+        int len = 8;
 
-        
-
-        System.out.println("");
-
-        for (int i = 0; i < 12; i++) {
-            ScheduleCell curCell = this.schedule.get(i);
-
-            if (curCell.emission != null) {
-                System.out.print(curCell.emission.getName());
-            }
-            else {
-                System.out.print("none");
-            }
+        for (i = i; i < len; i++) {
+            String output = Integer.toString(i) + ":00-" + Integer.toString(i + 1) + ":00";
+            System.out.printf("%-15s", output);
         }
 
-        for (int i = 12; i < 24; i++) System.out.print(i + ":00 - " + i + 1 + ":00");
+        System.out.printf("\n");
 
-        System.out.println("");
+        for (j = j; j < len; j++) {
+            String output;
+            ScheduleCell curCell = this.schedule.get(j);
 
-        for (int i = 12; i < 24; i++) {
-            ScheduleCell curCell = this.schedule.get(i);
+            if (curCell.emission != null) output = curCell.emission.getName();
+            else output = "none";
 
-            if (curCell.emission != null) {
-                System.out.print(curCell.emission.getName());
-            }
-            else {
-                System.out.print("none");
-            }
+            System.out.printf("%-15s", output);
         }
+
+        System.out.printf("\n\n");
+
+        len = 16;
+
+        for (i = i; i < len; i++) {
+            String output = Integer.toString(i) + ":00-" + Integer.toString(i + 1) + ":00";
+            System.out.printf("%-15s", output);
+        }
+
+        System.out.printf("\n");
+
+        for (j = j; j < len; j++) {
+            String output;
+            ScheduleCell curCell = this.schedule.get(j);
+
+            if (curCell.emission != null) output = curCell.emission.getName();
+            else output = "none";
+
+            System.out.printf("%-15s", output);
+        }
+
+        System.out.printf("\n\n");
+
+        len = 24;
+
+        for (i = i; i < len; i++) {
+            String output = Integer.toString(i) + ":00-" + Integer.toString(i + 1) + ":00";
+            System.out.printf("%-15s", output);
+        }
+
+        System.out.printf("\n");
+
+        for (j = j; j < len; j++) {
+            String output;
+            ScheduleCell curCell = this.schedule.get(j);
+
+            if (curCell.emission != null) output = curCell.emission.getName();
+            else output = "none";
+
+            System.out.printf("%-15s", output);
+        }
+
+        System.out.printf("\n\n");
     }
 }
