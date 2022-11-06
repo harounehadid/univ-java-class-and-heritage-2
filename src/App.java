@@ -90,6 +90,8 @@ public class App {
                         System.out.println("Hours range 0h - 6h and 14h - 18h:  ");
                     }
 
+                    System.out.print(">> ");
+
                     int startingHour = keyboard.nextInt();
                     emission.calculateEndingHour(startingHour);
                     todaySchedule.addEmission(emission);
