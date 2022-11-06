@@ -68,9 +68,7 @@ public class App {
                         emission = new Fiction(name, duration, date, directorName, rediffuse.equals("y"));
                     }
                     else if (typeChosen == 2) {
-                        // Max value is excluded
-                        duration = Utils.minMaxInt(1, 7);
-                        emission = new Reportage(name, duration);
+                        emission = new Reportage(name);
                     }
                     else {
                         emission = null;
