@@ -78,7 +78,18 @@ public class App {
                 }
 
                 if (emission != null) {
-                    System.out.print("\nEnter the starting hour:  ");
+                    System.out.print("\nEnter the starting hour ");
+
+                    if (emission.getType().equals(Utils.getEntertainmentClassTag())) {
+                        System.out.println("Hours range 18h - 23h:  ");
+                    }
+                    else if (emission.getType().equals(Utils.getFictionClassTag())) {
+                        System.out.println("Hours range 21h - 0h:  ");
+                    }
+                    else if (emission.getType().equals(Utils.getReportageTag())) {
+                        System.out.println("Hours range 0h - 6h and 14h - 18h:  ");
+                    }
+
                     int startingHour = keyboard.nextInt();
                     emission.calculateEndingHour(startingHour);
                     todaySchedule.addEmission(emission);
