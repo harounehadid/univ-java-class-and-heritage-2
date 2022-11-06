@@ -97,6 +97,7 @@ public class App {
             }
 
             todaySchedule.displaySchedule();
+            todaySchedule.displayScheduledEmissions();
             
         } while (addEmission);
     }

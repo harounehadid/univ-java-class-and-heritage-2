@@ -35,9 +35,13 @@ public class ScheduleManagement {
     final String ANSI_RESET = "\u001B[0m";
     final String ANSI_RED = "\u001B[31m";
 
+    ArrayList<Emission> scheduledEmissionsList;
+
     public ScheduleManagement() {
         this.schedule = new ArrayList<ScheduleCell>();
-        nextDayEmissions = new ArrayList<Emission>();
+        this.nextDayEmissions = new ArrayList<Emission>();
+        this.scheduledEmissionsList = new ArrayList<Emission>();
+
         this.initiateSchedule();
     }
 
@@ -103,6 +107,8 @@ public class ScheduleManagement {
             for (int i = newEmission.getStartingHour(); i < newEmission.getEndingHour(); i++) {
                 schedule.get(i).setEmission(newEmission);
             }
+
+            this.scheduledEmissionsList.add(newEmission);
         }
         else {
             System.out.println(ANSI_RED + "\nThere is a time conflict!" + ANSI_RESET + "\n\n");
@@ -205,5 +211,18 @@ public class ScheduleManagement {
 
             i = jumpingIndex - 1;
         }
+    }
+
+    public void displayScheduledEmissions() {
+        System.out.println("\n\nPrinting the list of scheduled emissions");
+        
+        for (Emission em : this.scheduledEmissionsList) {
+            System.out.print("Type >  " + em.getType());
+            System.out.print("  |  Name >  " + em.getName());
+            System.out.print("  |  Duration >  " + em.getDuration());
+            System.out.print("\n");
+        }
+
+        System.out.println("\n\n");
     }
 }
